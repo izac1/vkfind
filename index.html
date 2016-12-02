@@ -1,0 +1,76 @@
+<!DOCTYPE html>	
+
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>Сервис поиска общих друзей Вконтакте</title>
+		<meta name="description" content="Не можешь найти человека в Вконтакте, но точно знаешь что он может быть у нескольких друзей ? Сэкономь время , воспользуйся нашим сервисом. Добавь ссылки на друзья в форму и нажми кнопку "Найти" и ты увидишь всех общих друзей.Максимальное количество сравнимых друзей 4. Если вам понравился сервис можете рассказать о нас друзьям."> 
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+		<script src="js/controller.js"></script>
+		<script src="js/service.js"></script>
+		<script src="js/jquery-2.2.3.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wait.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	</head>
+	<body ng-app="webApp" ng-controller="MyCtr">
+		<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-sx-12 centered">
+        	<h2 class="text-center">Найди человека в vk.com</h2>
+        	<p class="text-center">Не можешь найти человека в Вконтакте, но точно знаешь что он может быть у нескольких друзей ? Сэкономь время , воспользуйся нашим сервисом. Добавь ссылки на друзья в форму и нажми кнопку "Найти" и ты увидишь всех общих друзей.Максимальное количество сравнимых друзей 4. Если вам понравился сервис можете рассказать о нас друзьям.</p>
+        	<div class="pluso col-md-7 col-md-offset-3 col-sx-12 col-xs-offset-1 col-sm-12 col-sm-offset-3"  data-background="#ebebeb" data-options="big,square,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,google,bookmark,moimir"></div>
+		<form class="col-md-12">
+		<legend></legend>
+		<div class="input-group" ng-repeat="id in ids">
+				<span class="input-group-addon" id="basic-addon3">https://vk.ru/</span><input type="text"  class="form-control" ng-model="id.id">
+		</div>
+		<div class="bg-danger"><span  ng-show="error" ng-model="error">{{error}}</span></div>
+		<div style="margin-top: 20px;">
+			<div class="table-responsive">
+			<table class="table" ng-show="panel">
+				<thead>
+      				<tr>
+      					<th></th>
+      					<th>Имя Фамилия</th>
+				        <th>Пол<br/>
+				        	<select ng-show="panel" class="form-control" name="singleSelect" ng-options="sex as sex.name for sex in sexx" ng-model="sex" ng-change="changee()"></select>
+				        </th>
+				        <th>Город<br/><select ng-show="panel" class="ng-hide form-control" name="singleSelect" ng-options="city as city for city in citys" ng-model="city" ng-change="changee()"></select>
+
+				        </th>
+				        <th>Страна<br/>
+				        	<select  ng-show="panel" class="ng-hide form-control" name="singleSelect" ng-options="country as country for country in countrys" ng-model="country" ng-change="changee()"></select>
+				        </th>
+      				</tr>
+   				</thead>
+   				<tbody ng-repeat="con in content">
+   					<tr>
+       				 <td><img class="" ng-src="{{con.photo_100}}"/></td>
+        			 <td><a href="https://vk.com/id{{con.uid}}" >{{con.first_name}} {{con.last_name}}</a></td>
+        			 <td>{{con.sex!=1 ? 'мужской' : 'женский' }}</td>
+        			 <td>{{con.city}}</td>
+        			 <td>{{con.country}}</td>
+      				</tr>
+   				</tbody>
+			</table>
+		</div>
+		</div>
+		<div ng-hide="panel" style="text-align: center;">
+			<button class="btn btn-success"  ng-click="find()">Найти</button>
+			<button class="btn" ng-click="add()">Добавить человека</button>
+		</div>
+		</form>
+	</div>
+	</div>
+	</div>
+	</body>
+</html>
+
+
+
+
+			
+
+			
