@@ -32,9 +32,12 @@
 				<span class="input-group-addon" id="basic-addon3">https://vk.ru/</span><input type="text"  class="form-control" ng-model="id.id">
 		</div>
 		<div class="bg-danger"><span  ng-show="error" ng-model="error">{{error}}</span></div>
-		<div style="margin-top: 20px;">
-			<div class="table-responsive">
-			<table class="table" ng-show="panel">
+		<div style="margin-top: 20px;" ng-show="panel">
+			<div class="text-center">
+					<button class="btn btn-success" ng-click="go()">Начать с начала.</button>
+			</div>
+			<div class="table-responsive" style="margin-top: 20px;">
+			<table class="table">
 				<thead>
       				<tr>
       					<th></th>
@@ -62,7 +65,7 @@
 			</table>
 		</div>
 		</div>
-		<div ng-hide="panel" style="text-align: center;">
+		<div ng-hide="panel" style="text-align: center; margin-top: 20px;">
 			<button class="btn btn-success"  ng-click="find()">Найти</button>
 			<button class="btn" ng-click="add()">Добавить человека</button>
 		</div>

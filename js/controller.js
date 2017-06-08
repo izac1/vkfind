@@ -168,5 +168,9 @@ app.controller('MyCtr', function($scope, API, $q) {
 			});
 			$scope.content = res;
 		}
+	};
+
+	$scope.go = function(){
+		window.location.reload();
 	}
 });
