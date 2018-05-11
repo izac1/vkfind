@@ -1,3 +1,5 @@
+let app_code = "2e8a0c762e8a0c762ed34fdbfb2eb7b9e422e8a2e8a0c76763e1f0796c6a43177c7d812"; //insert your app code from vk.com
+let api_version = "4.104";// vk api version
 angular.module('webApp.service', [])
 
 .factory('API', function($http, $q) {
@@ -8,10 +10,12 @@ angular.module('webApp.service', [])
 			var data = [];
 			//console.log('1234');
 			var deferred = $q.defer();
-			$http.jsonp("http://api.vk.com/method/users.get", {
+			$http.jsonp("https://api.vk.com/method/users.get", {
 					params: {
 						user_ids: id,
-						callback: 'JSON_CALLBACK'
+						callback: 'JSON_CALLBACK',
+						access_token: app_code,
+						v:api_version
 					},
 				})
 				.success(function(res) {
@@ -21,6 +25,7 @@ angular.module('webApp.service', [])
 					//console.log(res);
 					res.response.forEach(function(ent) {
 						//
+						console.log(ent.id);
 						data.push(ent.uid);
 					});
 
@@ -34,12 +39,14 @@ angular.module('webApp.service', [])
 			var promises = [];
 			ids.forEach(function(ent) {
 				var deferred = $q.defer();
-				$http.jsonp("http://api.vk.com/method/friends.get", {
+				$http.jsonp("https://api.vk.com/method/friends.get", {
 						params: {
 							user_id: ent,
 							order: "name",
 							fields: "city,sex,country,photo_100",
-							callback: 'JSON_CALLBACK'
+							callback: 'JSON_CALLBACK',
+							access_token: app_code,
+							v:api_version
 						},
 					})
 					.success(function(res) {
@@ -88,10 +95,12 @@ angular.module('webApp.service', [])
 			var promise = [];
 			user.forEach(function(ress) {
 				var deferred = $q.defer();
-				$http.jsonp("http://api.vk.com/method/database.getCitiesById", {
+				$http.jsonp("https://api.vk.com/method/database.getCitiesById", {
 						params: {
 							city_ids: ress.city,
-							callback: 'JSON_CALLBACK'
+							callback: 'JSON_CALLBACK',
+							access_token: app_code,
+							v:api_version
 						},
 					})
 					.success(function(res) {
@@ -118,10 +127,12 @@ angular.module('webApp.service', [])
 			var promise = [];
 			user.forEach(function(ress) {
 				var deferred = $q.defer();
-				$http.jsonp("http://api.vk.com/method/database.getCountriesById", {
+				$http.jsonp("https://api.vk.com/method/database.getCountriesById", {
 						params: {
 							country_ids: ress.country,
-							callback: 'JSON_CALLBACK'
+							callback: 'JSON_CALLBACK',
+							access_token: app_code,
+							v:api_version
 						},
 					})
 					.success(function(res) {
