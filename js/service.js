@@ -1,5 +1,5 @@
-let app_code = "2e8a0c762e8a0c762ed34fdbfb2eb7b9e422e8a2e8a0c76763e1f0796c6a43177c7d812"; //insert your app code from vk.com
-let api_version = "4.104";// vk api version
+let app_code = ""; //insert your app code from vk.com
+let api_version = "";// vk api version
 angular.module('webApp.service', [])
 
 .factory('API', function($http, $q) {
