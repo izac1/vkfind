@@ -1,5 +1,5 @@
 let app_code = "2e8a0c762e8a0c762ed34fdbfb2eb7b9e422e8a2e8a0c76763e1f0796c6a43177c7d812"; //insert your app code from vk.com
-let api_version = "4.104";// vk api version
+let api_version = "5.00";// vk api version
 angular.module('webApp.service', [])
 
 .factory('API', function($http, $q) {
@@ -8,7 +8,7 @@ angular.module('webApp.service', [])
 	return {
 		Getids: function(id) {
 			var data = [];
-			//console.log('1234');
+			
 			var deferred = $q.defer();
 			$http.jsonp("https://api.vk.com/method/users.get", {
 					params: {
@@ -20,13 +20,13 @@ angular.module('webApp.service', [])
 				})
 				.success(function(res) {
 					if (res.error) {
+						
 						return deferred.reject(res.error);
 					}
 					//console.log(res);
 					res.response.forEach(function(ent) {
 						//
-						console.log(ent.id);
-						data.push(ent.uid);
+						data.push(ent.id);
 					});
 
 					deferred.resolve(data);
@@ -65,22 +65,24 @@ angular.module('webApp.service', [])
 			var deferred = $q.defer();
 			switch (frie.length) {
 				case 2:
-					deferred.resolve(getF2(frie[0], frie[1]));
+					deferred.resolve(getF2(frie[0].items, frie[1].items));
 					break;
 				case 3:
-					deferred.resolve(getF2(getF2(frie[0], frie[1]), frie[2]));
+					deferred.resolve(getF2(getF2(frie[0].items, frie[1].items), frie[2].items));
 					break;
 				case 4:
-					deferred.resolve(getF2(getF2(frie[0], frie[1]), getF2(frie[2], frie[3])));
+					deferred.resolve(getF2(getF2(frie[0].items, frie[1].items), getF2(frie[2].items, frie[3].items)));
 					break;
 			}
 			return deferred.promise;
 
 			function getF2(a, b) {
+				
 				var res = [];
-				a.forEach(function(p) {
-					b.forEach(function(p2) {
-						if (p.uid == p2.uid && (p.deactivated == undefined && p2.deactivated == undefined))
+
+				a.map(function(p) {
+					b.map(function(p2) {
+						if (p.id == p2.id && (p.deactivated == undefined && p2.deactivated == undefined))
 						//console.log(men);
 							res.push(p);
 						else
@@ -107,13 +109,14 @@ angular.module('webApp.service', [])
 						if (res.error) {
 							return deferred.reject(res.error);
 						}
+						console.log(res);
 						if (res.response[0] === undefined) {
 							res.response = "Город не указан";
 							ress.city = res.response;
 							deferred.resolve(res.response);
 						} else {
-							deferred.resolve(res.response[0].name);
-							ress.city = res.response[0].name;
+							deferred.resolve(res.response[0].title);
+							ress.city = res.response[0].title;
 						}
 					});
 				promise.push(deferred.promise);
@@ -144,8 +147,8 @@ angular.module('webApp.service', [])
 							ress.country = res.response;
 							deferred.resolve(res.response);
 						} else {
-							deferred.resolve(res.response[0].name);
-							ress.country = res.response[0].name;
+							deferred.resolve(res.response[0].title);
+							ress.country = res.response[0].title;
 						}
 					});
 				promise.push(deferred.promise);
