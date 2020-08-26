@@ -1,4 +1,4 @@
 # vkfind
 Simple vk find app 
 
-live demo: http://vkfind.ml
+live demo: http://vkfind.pp.ua
