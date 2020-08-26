@@ -97,6 +97,10 @@ angular.module('webApp.service', [])
 			var promise = [];
 			user.forEach(function(ress) {
 				var deferred = $q.defer();
+				var cityId = -1;
+				if (ress.city !== undefined) {
+					cityId = ress.city.id;
+				}
 				$http.jsonp("https://api.vk.com/method/database.getCitiesById", {
 						params: {
 							city_ids: ress.city,
@@ -130,6 +134,10 @@ angular.module('webApp.service', [])
 			var promise = [];
 			user.forEach(function(ress) {
 				var deferred = $q.defer();
+				var countryId = -1;
+				if (ress.country !== undefined) {
+					countryId = ress.country.id;
+				}
 				$http.jsonp("https://api.vk.com/method/database.getCountriesById", {
 						params: {
 							country_ids: ress.country,
