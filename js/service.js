@@ -103,7 +103,7 @@ angular.module('webApp.service', [])
 				}
 				$http.jsonp("https://api.vk.com/method/database.getCitiesById", {
 						params: {
-							city_ids: ress.city,
+							city_ids: cityId,
 							callback: 'JSON_CALLBACK',
 							access_token: app_code,
 							v:api_version
@@ -140,7 +140,7 @@ angular.module('webApp.service', [])
 				}
 				$http.jsonp("https://api.vk.com/method/database.getCountriesById", {
 						params: {
-							country_ids: ress.country,
+							country_ids: countryId,
 							callback: 'JSON_CALLBACK',
 							access_token: app_code,
 							v:api_version
